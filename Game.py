@@ -4,6 +4,7 @@ from World import World
 from Snake import Snake
 from Apple import Apple
 from PlayerController import PlayerController
+from GreedyController import GreedyController
 
 # Initialize Pygame
 pygame.init()
@@ -29,8 +30,10 @@ def main():
     apple = Apple(25)
     snake = Snake(25, 300, 300, WIDTH, HEIGHT)
     controller = PlayerController(snake)
-    world = World(snake, apple, controller, WIDTH, HEIGHT)
-    
+    greedyController = GreedyController(snake)
+    world = World(snake, apple, greedyController, WIDTH, HEIGHT)
+    greedyController.giveWorldView(world)
+
     while running:
         clock.tick(FPS)
 
@@ -46,7 +49,8 @@ def main():
                 # Handle movement
                 else:
                     world.doInput(event)
-
+        
+        world.doInput()
         world.doMovement()
 
         screen.fill(BLACK)

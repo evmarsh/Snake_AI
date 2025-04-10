@@ -1,7 +1,8 @@
 import pygame.math
 import random
 import math
-
+import pygame
+from typing import Optional  # Import Optional
 class World:
     def __init__(self, s, a, controller, width, height):
         self.snake = s
@@ -13,6 +14,13 @@ class World:
         self.total_deaths = 0
 
         self.placeApple()
+
+    def updateController(self, controller):
+        self.controller = controller
+
+    # Returns world size
+    def getWorldSize(self):
+        return pygame.math.Vector2(self.width, self.height)
     
     # Returns snake position as vector2
     def getSnakePos(self):
@@ -20,14 +28,14 @@ class World:
     
     # Returns apple position as vector2
     def getApplePos(self):
-        return self.apple.position
+        return self.apple.pos
     
     # Tells controller to move agent
     def doMovement(self):
         self.controller.move()
 
     # Tells controller to handle input if needed
-    def doInput(self, event):
+    def doInput(self, event: Optional[pygame.event] = None):
         self.controller.processInput(event)
 
     # Places apple in random location where snake isn't
