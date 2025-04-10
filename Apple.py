@@ -3,8 +3,8 @@ import pygame
 RED = (255, 0, 0)
 
 class Apple:
-    def __init__(self):
-        self.size = 50
+    def __init__(self, size):
+        self.size = size
         self.pos = pygame.math.Vector2()
 
     def draw(self, surface):

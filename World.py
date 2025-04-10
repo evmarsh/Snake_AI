@@ -1,5 +1,6 @@
 import pygame.math
 import random
+import math
 
 class World:
     def __init__(self, s, a, controller, width, height):
@@ -36,8 +37,8 @@ class World:
 
         notDone = True
         while (notDone):
-            randX = random.randint(0, 14) * 50
-            randY = random.randint(0, 14) * 50
+            randX = random.randint(0, int(math.floor(self.width / self.snake.get_size())) - 1) * self.snake.get_size()
+            randY = random.randint(0, int(math.floor(self.height / self.snake.get_size())) - 1) * self.snake.get_size()
 
             notDone = False
 

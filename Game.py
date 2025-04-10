@@ -9,7 +9,7 @@ from PlayerController import PlayerController
 pygame.init()
 
 # Set up display dimensions
-WIDTH, HEIGHT = 750, 750
+WIDTH, HEIGHT = 1000, 750
 WINDOW_TITLE = "Snake"
 
 # Set up colors
@@ -26,8 +26,8 @@ FPS = 10
 def main():
     running = True
     
-    apple = Apple()
-    snake = Snake()
+    apple = Apple(25)
+    snake = Snake(25, 300, 300, WIDTH, HEIGHT)
     controller = PlayerController(snake)
     world = World(snake, apple, controller, WIDTH, HEIGHT)
     
