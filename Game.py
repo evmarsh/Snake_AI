@@ -5,6 +5,17 @@ from Snake import Snake
 from Apple import Apple
 from PlayerController import PlayerController
 from GreedyController import GreedyController
+from Controller import Controller
+
+print("\n" + "=" * 40)
+print("Please choose agent algorithm")
+print("=" * 40)
+print("1. Player Controlled")
+print("2. Greedy Algorithm (Manhattan)")
+print("3. Reinforcement Algorithm")
+print("4. A* Algorithm (Manhattan)")
+
+agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4): ").strip()
 
 # Initialize Pygame
 pygame.init()
@@ -23,16 +34,33 @@ pygame.display.set_caption(WINDOW_TITLE)
 clock = pygame.time.Clock()
 FPS = 10
 
+
 # Main game loop
 def main():
     running = True
     
     apple = Apple(25)
     snake = Snake(25, 300, 300, WIDTH, HEIGHT)
-    controller = PlayerController(snake)
-    greedyController = GreedyController(snake)
-    world = World(snake, apple, greedyController, WIDTH, HEIGHT)
-    greedyController.giveWorldView(world)
+    
+    match agent_algorithm_selection:
+        case "1":
+            controller = PlayerController(snake)
+        case "2":
+            controller = GreedyController(snake)
+        case "3":
+            pass
+            controller = PlayerController(snake)
+        case "4":
+            pass
+            controller = PlayerController(snake)
+        case  _:
+            controller = PlayerController(snake)
+            print("Defaulting controller to player")
+
+
+    world = World(snake, apple, controller, WIDTH, HEIGHT)
+    
+    controller.giveWorldView(world)
 
     while running:
         clock.tick(FPS)
