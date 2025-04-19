@@ -20,6 +20,10 @@ agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4): ").
 # Initialize Pygame
 pygame.init()
 
+# Load a font
+font = pygame.font.SysFont("Arial", 36)  # You can also load a TTF file with pygame.font.Font("path/to/font.ttf", size)
+
+
 # Set up display dimensions
 WIDTH, HEIGHT = 1000, 750
 WINDOW_TITLE = "Snake"
@@ -82,6 +86,15 @@ def main():
         world.doMovement()
 
         screen.fill(BLACK)
+
+        # Get the score from the world or snake (depending on your logic)
+        score = world.score
+
+        # Render the score text
+        score_surface = font.render(f"Score: {score}", True, (255, 255, 255))  # White text
+
+        # Position it at the top-left corner
+        screen.blit(score_surface, (10, 10))
         
         world.doCollisions()
         world.draw(screen)
