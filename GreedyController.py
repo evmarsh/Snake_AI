@@ -49,9 +49,9 @@ class GreedyController(Controller):
                 continue
 
             # Avoid self-collision by checking the tuple (new_x, new_y)
-            if (new_x, new_y) in visited:  # Check with tuple (x, y) for collision
-                print(f"Move ({new_x}, {new_y}) collides with the snake's body.")
-                continue
+            # if (new_x, new_y) in visited:  # Check with tuple (x, y) for collision
+            #    print(f"Move ({new_x}, {new_y}) collides with the snake's body.")
+            #    continue
 
             # Manhattan distance to food
             distance = abs(new_x - food_position.x) + abs(new_y - food_position.y)

@@ -1,3 +1,4 @@
+from nt import scandir
 import pygame.math
 import random
 import math
@@ -12,6 +13,7 @@ class World:
         self.height = height
         self.score = 0
         self.total_deaths = 0
+        self.maxScore = 0
 
         self.placeApple()
 
@@ -62,6 +64,7 @@ class World:
             self.placeApple()
             self.snake.grow()
             self.score += 1
+            self.maxScore = max(self.score, self.maxScore)
         elif (self.snake.length() > 1):
             if (self.snake.colliding_self()):
                 self.snake.reset()

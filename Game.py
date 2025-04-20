@@ -20,6 +20,10 @@ agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4): ").
 # Initialize Pygame
 pygame.init()
 
+# Load a font
+font = pygame.font.SysFont("Arial", 36)
+
+
 # Set up display dimensions
 WIDTH, HEIGHT = 1000, 750
 WINDOW_TITLE = "Snake"
@@ -82,6 +86,18 @@ def main():
         world.doMovement()
 
         screen.fill(BLACK)
+
+        # Get the score from the wordl class
+        score = world.score
+        max_score = world.maxScore
+
+        # Render the score text
+        score_surface = font.render(f"Score: {score}", True, (255, 255, 255))  # White text
+        max_score_surface = font.render(f"Max Score: {max_score}", True, (255, 255, 255))  # White text
+
+        # Position it at the top-left corner
+        screen.blit(score_surface, (10, 10))
+        screen.blit(max_score_surface, (750, 10))
         
         world.doCollisions()
         world.draw(screen)
