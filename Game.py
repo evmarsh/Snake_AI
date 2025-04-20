@@ -21,7 +21,7 @@ agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4): ").
 pygame.init()
 
 # Load a font
-font = pygame.font.SysFont("Arial", 36)  # You can also load a TTF file with pygame.font.Font("path/to/font.ttf", size)
+font = pygame.font.SysFont("Arial", 36)
 
 
 # Set up display dimensions
@@ -87,7 +87,7 @@ def main():
 
         screen.fill(BLACK)
 
-        # Get the score from the world or snake (depending on your logic)
+        # Get the score from the wordl class
         score = world.score
 
         # Render the score text
