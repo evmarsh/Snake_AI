@@ -6,6 +6,7 @@ from Apple import Apple
 from PlayerController import PlayerController
 from GreedyController import GreedyController
 from Controller import Controller
+from UniformCostSearch import UniformCostSearchController
 
 print("\n" + "=" * 40)
 print("Please choose agent algorithm")
@@ -14,8 +15,9 @@ print("1. Player Controlled")
 print("2. Greedy Algorithm (Manhattan)")
 print("3. Reinforcement Algorithm")
 print("4. A* Algorithm (Manhattan)")
+print("5. Uniform Cost Search")
 
-agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4): ").strip()
+agent_algorithm_selection = input("Please enter your choice (1 / 2 / 3 / 4 / 5): ").strip()
 
 # Initialize Pygame
 pygame.init()
@@ -57,6 +59,8 @@ def main():
         case "4":
             pass
             controller = PlayerController(snake)
+        case "5":
+            controller = UniformCostSearchController(snake)
         case  _:
             controller = PlayerController(snake)
             print("Defaulting controller to player")
