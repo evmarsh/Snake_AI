@@ -7,7 +7,7 @@ from PlayerController import PlayerController
 from GreedyController import GreedyController
 from Controller import Controller
 from UniformCostSearch import UniformCostSearchController
-
+from AStarController import AStarSearchController
 print("\n" + "=" * 40)
 print("Please choose agent algorithm")
 print("=" * 40)
@@ -57,8 +57,7 @@ def main():
             pass
             controller = PlayerController(snake)
         case "4":
-            pass
-            controller = PlayerController(snake)
+            controller = AStarSearchController(snake)
         case "5":
             controller = UniformCostSearchController(snake)
         case  _:
