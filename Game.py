@@ -28,7 +28,7 @@ font = pygame.font.SysFont("Arial", 36)
 
 
 # Set up display dimensions
-WIDTH, HEIGHT = 1000, 750
+WIDTH, HEIGHT = 500, 500
 WINDOW_TITLE = "Snake"
 
 # Set up colors
@@ -81,6 +81,8 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                    controller.plot_rewards(controller.reward_per_epoch)
+                    controller.plot_costs(controller.cost)
                 # Handle movement
                 else:
                     world.doInput(event)

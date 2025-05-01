@@ -37,6 +37,8 @@ class Snake:
         self.body[0].y += self.velocity * self.direction.y
 
     def change_direction(self, direction: pg.math.Vector2):
+        # if (self.direction + direction != pg.math.Vector2(0,0)):
+        #     self.direction = direction
         self.direction = direction
 
     def grow(self):
@@ -84,3 +86,34 @@ class Snake:
     
     def get_size(self):
         return self.size
+    
+    def get_direction(self):
+        return self.direction
+    
+    def check_danger(self, point: pg.math.Vector2):
+        result = False
+        if (point in self.body):
+            result = True
+        elif (point.x < 0):
+            result = True
+        elif (point.x > self.screen_width):
+            result = True
+        elif (point.y < 0):
+            result = True
+        elif (point.y > self.screen_height):
+            result = True
+        
+        return result
+
+    def check_wall(self, point: pg.math.Vector2):
+        result = False
+        if (point.x < 0):
+            result = True
+        elif (point.x >= self.screen_width):
+            result = True
+        elif (point.y < 0):
+            result = True
+        elif (point.y >= self.screen_height):
+            result = True
+
+        return result

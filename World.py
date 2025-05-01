@@ -26,7 +26,7 @@ class World:
     
     # Returns snake position as vector2
     def getSnakePos(self):
-        return self.snake.position
+        return self.snake.body[0].xy
     
     # Returns apple position as vector2
     def getApplePos(self):
@@ -84,6 +84,5 @@ class World:
         self.snake.draw(surface)
         self.apple.draw(surface)
 
-    
-
-    
+    def getDeaths(self):
+        return self.total_deaths

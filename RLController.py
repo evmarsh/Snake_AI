@@ -153,7 +153,7 @@ class RLController(Controller):
         return [appleLeft, appleRight, appleUp, appleDown, appleEaten, directionLeft, directionRight, directionUp, directionDown, dangerLeft, dangerRight, dangerUp, dangerDown, collision]
         
 
-    def set_world(self, w):
+    def giveWorldView(self, w):
         self.world = w
 
     def get_random_action(self):
