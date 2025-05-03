@@ -36,29 +36,42 @@ class AStarSearchController(Controller):
             # Manhattan distance to food
             return abs(x - food_position.x) + abs(y - food_position.y)
 
-        # Priority queue: (f_score, g_score, (x, y), path_so_far)
-        frontier = []
-        heapq.heappush(frontier, (heuristic(head.x, head.y), 0, (head.x, head.y), []))
+        start = (head.x, head.y)
+        g_scores = {start: 0}  # Cost from start to a node
+        visited = {}  
 
-        visited = set((segment.x, segment.y) for segment in self.snake.body)
+        # Track the snake to avoid collisions
+        body_positions = set((segment.x, segment.y) for segment in self.snake.body)
+
+        # Priority queue for A* (f_score, g_score, position, path_taken)
+        frontier = []
+        heapq.heappush(frontier, (heuristic(head.x, head.y), 0, start, []))
 
         while frontier:
-            f_score, g_score, (current_x, current_y), path = heapq.heappop(frontier)
+            f_score, g_score, current, path = heapq.heappop(frontier)
+            current_x, current_y = current
 
-            if (current_x, current_y) == (food_position.x, food_position.y):
+            # Pull node with lowest f_score (cost)
+            if current in visited and visited[current] <= g_score:
+                continue
+            visited[current] = g_score
+
+            if current == (food_position.x, food_position.y):
                 if path:
                     return path[0]
-                else:
-                    return None  # Already at food
 
+            # Explore logic 
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 new_x = current_x + dx * self.snake.size
                 new_y = current_y + dy * self.snake.size
+                new_pos = (new_x, new_y)
 
+                # Skip if outside grid 
                 if not (0 <= new_x < world_size.x and 0 <= new_y < world_size.y):
                     continue
 
-                if (new_x, new_y) in visited:
+                # Skip if occupied by snake 
+                if new_pos in body_positions:
                     continue
 
                 new_g = g_score + 1
@@ -66,8 +79,7 @@ class AStarSearchController(Controller):
                 new_f = new_g + new_h
                 new_path = path + [(dx, dy)]
 
-                heapq.heappush(frontier, (new_f, new_g, (new_x, new_y), new_path))
-                visited.add((new_x, new_y))
+                if new_pos not in visited or new_g < visited[new_pos]:
+                    heapq.heappush(frontier, (new_f, new_g, new_pos, new_path)) # Add node back to queue 
 
-        return None
-
+        return None 
