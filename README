@@ -1,0 +1,7 @@
+In order to run the project:
+
+1 - Ensure both Pygame and PyTorch are installed.
+
+2 - Run the command: python Game.py
+
+3 - Select the algorithm to be ran based on its number 1-5
